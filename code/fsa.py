@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+## For calculate mid line of femoral body shaft
 # Step 1: Detect edges of femoral shaft using Canny
 img = cv2.imread('./raw_data/train/fbody/4001.jpg', 0)  # Load image in grayscale
 edges = cv2.Canny(img, 100, 250)

@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 
 # Load the input image
-img = cv2.imread('./raw_data/train/5.jpg', cv2.IMREAD_GRAYSCALE)
-original_img = cv2.imread('./raw_data/train/5.jpg', cv2.IMREAD_GRAYSCALE)
-ori = cv2.imread('./raw_data/train/5.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('./raw_data/train/fhip/2001.jpg', cv2.IMREAD_GRAYSCALE)
+original_img = cv2.imread('./raw_data/train/fhip/2001.jpg', cv2.IMREAD_GRAYSCALE)
+ori = cv2.imread('./raw_data/train/fhip/2001.jpg', cv2.IMREAD_GRAYSCALE)
 
 # Apply Gaussian blur to the image to reduce noise
 img_blur = cv2.GaussianBlur(img, (5,5), 0)
@@ -66,7 +66,6 @@ for (x, y) in circle_points:
         
 for (x, y) in arc_result:
     cv2.circle(ori, (y,x), radius=1, color=(0, 0, 255), thickness=-1)
-
 
 # Define the starting and ending points of the line
 start_point = (arc_result[0][1],arc_result[0][0])

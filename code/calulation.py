@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import matplotlib.pyplot as plt
 # Load the input image
 img = cv2.imread('./raw_data/train/fhip/2001.jpg', cv2.IMREAD_GRAYSCALE)
 original_img = cv2.imread('./raw_data/train/fhip/2001.jpg', cv2.IMREAD_GRAYSCALE)
@@ -22,10 +22,11 @@ if circles is not None:
         cv2.circle(ori, (x, y), r, (0, 255, 0), 2)
         cv2.circle(ori, (x, y), 2, (0, 0, 255), 3)
         cv2.circle(mask, (x, y), r+16, (255, 255, 255),-1)
-
+        cor_circle = (x,y)
+        
 result = cv2.bitwise_or(img, mask)
 
-cv2.imwrite("femur_image.jpg", result)
+# cv2.imwrite("femur_image.jpg", result)
 
 # Apply Canny edge detection to find edges
 edges = cv2.Canny(mask, 50, 150)
@@ -77,8 +78,8 @@ cv2.line(ori, start_point, end_point, color, thickness)
 middle_point = ((start_point[0]+end_point[0])//2, (start_point[1]+end_point[1])//2)
 
 # Define the two endpoints of the line
-pt1 = (596, 347)
-pt2 = (664, 264)
+pt1 = (middle_point[0], middle_point[1])
+pt2 = (cor_circle[0],cor_circle[1])
 
 # Calculate the slope of the line
 m = (pt2[1] - pt1[1]) / (pt2[0] - pt1[0])
@@ -97,7 +98,7 @@ y2 = m * x2 + b
 cv2.line(ori, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 1)
 
 # Step 1: Detect edges of femoral shaft using Canny
-img = cv2.imread('./raw_data/train/6.jpg', 0)  # Load image in grayscale
+img = cv2.imread('./raw_data/train/fbody/4001.jpg', 0)  # Load image in grayscale
 edges = cv2.Canny(img, 100, 250)
 
 # Define the dimensions of the image
@@ -136,8 +137,15 @@ new_white_bg = np.ones((height, width, 3), np.uint8)*255
 
 cv2.line(new_white_bg, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 1)
 cv2.line(new_white_bg,(cols-1,int(mid_righty)),(0,int(mid_lefty)),(0,255,0),1)
+cv2.circle(new_white_bg, (488, 477), 5, (255, 0, 255),-1)
 
+cv2.circle(new_white_bg, (596, 347), 5, (255, 0, 255),-1)
+
+cv2.circle(new_white_bg, (596,887), 5, (255, 0, 255),-1)
 # Display the result
-cv2.imshow('edges', new_white_bg)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+plt.axis('off')
+imgplot = plt.imshow(new_white_bg)
+# cv2.imshow('edges', new_white_bg)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
