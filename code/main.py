@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
  
-img = cv2.imread('./raw_data/train/1.png')
+img = cv2.imread('./raw_data/train/dcom')
 # print(img.shape) # Print image shape
 shwimg= cv2.imshow("original", img)
  

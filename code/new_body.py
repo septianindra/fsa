@@ -19,7 +19,6 @@ femoral_contour = max(contours, key=cv2.contourArea)  # Select the largest conto
 cv2.drawContours(img, contours, -1, (0,255,0), 1)
 
 cnt = contours[1]
-
 rows,cols = white_img.shape[:2]
 [vx,vy,x,y] = cv2.fitLine(cnt, cv2.DIST_L2,0,0.01,0.01)
 lefty1 = int((-x*vy/vx) + y)
